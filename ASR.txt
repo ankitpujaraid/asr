@@ -1,0 +1,26 @@
+Sub AddSpacesAfterFourDigits()
+    Dim cell As Range
+    Dim cellValue As String
+    Dim newValue As String
+    Dim i As Integer
+
+    ' Loop through each cell in the selected range
+    For Each cell In Selection
+        ' Check if the cell contains a numeric value
+        If IsNumeric(cell.Value) Then
+            cellValue = CStr(cell.Value) ' Convert the cell value to string
+            newValue = ""
+            
+            ' Loop through the string and add spaces after every four digits
+            For i = 1 To Len(cellValue)
+                newValue = newValue & Mid(cellValue, i, 1)
+                If i Mod 4 = 0 And i <> Len(cellValue) Then
+                    newValue = newValue & " "
+                End If
+            Next i
+            
+            ' Set the new value back to the cell
+            cell.Value = newValue
+        End If
+    Next cell
+End Sub
